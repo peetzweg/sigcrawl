@@ -1,5 +1,7 @@
 # sigcrawl
 
+[![CI](https://github.com/peetzweg/sigcrawl/actions/workflows/ci.yml/badge.svg)](https://github.com/peetzweg/sigcrawl/actions/workflows/ci.yml)
+
 Signal Desktop archive CLI. Local-first.
 
 `sigcrawl` reads your Signal Desktop database via [`sigtop`](https://github.com/tbvdm/sigtop), stores a searchable SQLite archive in `~/.sigcrawl/sigcrawl.db`, and can back it up to a private git repo as age-encrypted shards.
