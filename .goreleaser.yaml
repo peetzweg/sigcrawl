@@ -52,3 +52,31 @@ release:
 # goreleaser's inline changelog generator to avoid duplication.
 changelog:
   disable: true
+
+# Push a Homebrew formula to peetzweg/homebrew-tap as part of the release.
+# Requires the HOMEBREW_TAP_TOKEN secret in this repo (a fine-grained PAT
+# with Contents: read/write on peetzweg/homebrew-tap).
+# After a release: `brew tap peetzweg/tap && brew install sigcrawl`.
+brews:
+  - name: sigcrawl
+    repository:
+      owner: peetzweg
+      name: homebrew-tap
+      branch: main
+      token: "{{ .Env.HOMEBREW_TAP_TOKEN }}"
+    directory: Formula
+    homepage: https://github.com/peetzweg/sigcrawl
+    description: "Local-first Signal Desktop archive crawler"
+    license: MIT
+    commit_author:
+      name: goreleaserbot
+      email: bot@goreleaser.com
+    install: |
+      bin.install "sigcrawl"
+    test: |
+      assert_match version.to_s, shell_output("#{bin}/sigcrawl version")
+    caveats: |
+      sigcrawl requires the `sigtop` binary for Signal Desktop SQLCipher
+      decryption. Install it with:
+
+        brew install --HEAD tbvdm/tap/sigtop

@@ -45,5 +45,8 @@ jobs:
           args: release --clean
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # PAT with Contents: read/write on peetzweg/homebrew-tap. Goreleaser's
+          # brews: block uses this to commit Formula/sigcrawl.rb to the tap.
+          HOMEBREW_TAP_TOKEN: ${{ secrets.HOMEBREW_TAP_TOKEN }}
           # CGO disabled (set in .goreleaser.yaml per-build). modernc.org/sqlite
           # is pure-Go so no native build deps are needed.
