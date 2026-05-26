@@ -1,0 +1,72 @@
+version: 2
+
+project_name: sigcrawl
+
+builds:
+  - id: sigcrawl
+    main: ./cmd/sigcrawl
+    binary: sigcrawl
+    env:
+      - CGO_ENABLED=0
+    flags:
+      - -trimpath
+    ldflags:
+      - -s -w -X github.com/peetzweg/sigcrawl/internal/cli.version={{ .Version }}
+    targets:
+      - darwin_amd64
+      - darwin_arm64
+      - linux_amd64
+      - linux_arm64
+      - windows_amd64
+      - windows_arm64
+
+archives:
+  - id: bundles
+    ids:
+      - sigcrawl
+    name_template: "{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
+    formats:
+      - tar.gz
+    format_overrides:
+      - goos: windows
+        formats:
+          - zip
+    files:
+      - README.md
+      - LICENSE
+
+checksum:
+  name_template: "sha256sums.txt"
+  algorithm: sha256
+
+changelog:
+  sort: asc
+  filters:
+    exclude:
+      - "^docs:"
+      - "^test:"
+      - "^ci:"
+      - "^Merge pull request"
+      - "^Merge branch"
+
+nfpms:
+  - id: linux-packages
+    ids:
+      - sigcrawl
+    package_name: sigcrawl
+    file_name_template: "{{ .ConventionalFileName }}"
+    homepage: https://github.com/peetzweg/sigcrawl
+    maintainer: Philip Poloczek <phil.czek@gmail.com>
+    description: Local-first Signal Desktop archive crawler — a Go CLI that mirrors your Signal messages into a searchable SQLite archive.
+    license: MIT
+    formats:
+      - deb
+      - rpm
+    bindir: /usr/bin
+    section: utils
+    priority: optional
+    contents:
+      - src: ./README.md
+        dst: /usr/share/doc/sigcrawl/README.md
+      - src: ./LICENSE
+        dst: /usr/share/doc/sigcrawl/LICENSE

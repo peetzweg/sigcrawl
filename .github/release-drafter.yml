@@ -1,0 +1,119 @@
+name-template: "v$RESOLVED_VERSION"
+tag-template: "v$RESOLVED_VERSION"
+template: |
+  ## What's Changed
+
+  $CHANGES
+
+  $CONTRIBUTORS
+
+categories:
+  - title: "Features"
+    labels:
+      - "feature"
+      - "enhancement"
+      - "feat"
+  - title: "Fixes"
+    labels:
+      - "bug"
+      - "fix"
+  - title: "Maintenance"
+    labels:
+      - "ci"
+      - "chore"
+      - "dependencies"
+      - "dep"
+      - "deps"
+      - "docs"
+      - "refactor"
+      - "test"
+      - "tests"
+      - "build"
+      - "perf"
+  - title: "Other Changes"
+    labels:
+      - "other"
+
+change-template: "- $TITLE (#$NUMBER) @$AUTHOR"
+change-title-escapes: '\<*_&'
+
+version-resolver:
+  major:
+    labels:
+      - "major"
+      - "breaking"
+  minor:
+    labels:
+      - "feature"
+      - "enhancement"
+      - "feat"
+  patch:
+    labels:
+      - "bug"
+      - "fix"
+      - "chore"
+      - "ci"
+      - "dependencies"
+      - "dep"
+      - "deps"
+      - "docs"
+      - "refactor"
+      - "test"
+      - "tests"
+      - "build"
+      - "perf"
+      - "other"
+  default: patch
+
+autolabeler:
+  - label: "feature"
+    title:
+      - '/^feat(\(.+\))?:/i'
+  - label: "feat"
+    title:
+      - '/^feat(\(.+\))?:/i'
+  - label: "enhancement"
+    title:
+      - '/^enhancement(\(.+\))?:/i'
+  - label: "fix"
+    title:
+      - '/^fix(\(.+\))?:/i'
+  - label: "bug"
+    title:
+      - '/^bug(\(.+\))?:/i'
+  - label: "perf"
+    title:
+      - '/^perf(\(.+\))?:/i'
+  - label: "refactor"
+    title:
+      - '/^refactor(\(.+\))?:/i'
+  - label: "docs"
+    title:
+      - '/^docs(\(.+\))?:/i'
+  - label: "build"
+    title:
+      - '/^build(\(.+\))?:/i'
+  - label: "ci"
+    title:
+      - '/^ci(\(.+\))?:/i'
+  - label: "test"
+    title:
+      - '/^test(\(.+\))?:/i'
+  - label: "tests"
+    title:
+      - '/^tests(\(.+\))?:/i'
+  - label: "chore"
+    title:
+      - '/^chore(\(.+\))?:/i'
+  - label: "dep"
+    title:
+      - '/^dep(\(.+\))?:/i'
+  - label: "deps"
+    title:
+      - '/^deps(\(.+\))?:/i'
+  - label: "dependencies"
+    title:
+      - '/^dependencies(\(.+\))?:/i'
+  - label: "other"
+    title:
+      - '/.*/'

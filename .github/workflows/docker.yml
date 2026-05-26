@@ -1,0 +1,32 @@
+name: docker
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Build image
+        run: docker build --pull -t sigcrawl:ci .
+
+      - name: Smoke test image
+        run: |
+          set -euo pipefail
+          help_output="$(docker run --rm sigcrawl:ci --help 2>&1 || true)"
+          printf '%s\n' "$help_output"
+          printf '%s' "$help_output" | grep -q "sigcrawl: Signal Desktop archive crawler"
+          # sigcrawl bundles git (for backup) and sigtop (for SQLCipher decryption).
+          docker run --rm --entrypoint git sigcrawl:ci --version
+          # sigtop has no --version flag; invoking with no args prints `usage:` to stderr and exits non-zero.
+          docker run --rm --entrypoint sigtop sigcrawl:ci 2>&1 | grep -q "^usage:" || \
+            (echo "sigtop binary missing or broken" && exit 1)
+          docker run --rm sigcrawl:ci --json doctor | grep -q '"store"'
