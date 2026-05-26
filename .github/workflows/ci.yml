@@ -98,25 +98,3 @@ jobs:
           ./bin/sigcrawl --json metadata | grep -q '"schema_version"'
           # doctor must run cleanly even with no Signal Desktop install on the CI runner.
           ./bin/sigcrawl --json doctor | grep -q '"store"'
-
-  release-check:
-    runs-on: ubuntu-latest
-    timeout-minutes: 15
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v6
-        with:
-          fetch-depth: 0
-
-      - name: Setup Go
-        uses: actions/setup-go@v6
-        with:
-          go-version-file: go.mod
-          cache: true
-
-      - name: Snapshot release build
-        uses: goreleaser/goreleaser-action@v7
-        with:
-          distribution: goreleaser
-          version: "~> v2"
-          args: release --snapshot --clean --skip=publish

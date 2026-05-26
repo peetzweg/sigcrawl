@@ -36,37 +36,19 @@ archives:
       - LICENSE
 
 checksum:
-  name_template: "sha256sums.txt"
+  name_template: "checksums.txt"
   algorithm: sha256
 
-changelog:
-  sort: asc
-  filters:
-    exclude:
-      - "^docs:"
-      - "^test:"
-      - "^ci:"
-      - "^Merge pull request"
-      - "^Merge branch"
+snapshot:
+  version_template: "{{ incpatch .Version }}-next"
 
-nfpms:
-  - id: linux-packages
-    ids:
-      - sigcrawl
-    package_name: sigcrawl
-    file_name_template: "{{ .ConventionalFileName }}"
-    homepage: https://github.com/peetzweg/sigcrawl
-    maintainer: Philip Poloczek <phil.czek@gmail.com>
-    description: Local-first Signal Desktop archive crawler — a Go CLI that mirrors your Signal messages into a searchable SQLite archive.
-    license: MIT
-    formats:
-      - deb
-      - rpm
-    bindir: /usr/bin
-    section: utils
-    priority: optional
-    contents:
-      - src: ./README.md
-        dst: /usr/share/doc/sigcrawl/README.md
-      - src: ./LICENSE
-        dst: /usr/share/doc/sigcrawl/LICENSE
+# release-please owns the GitHub Release body (it's auto-generated from
+# CHANGELOG.md). goreleaser only uploads artifacts to that existing release.
+release:
+  mode: keep-existing
+  prerelease: auto
+
+# release-please maintains CHANGELOG.md in the repo, so we disable
+# goreleaser's inline changelog generator to avoid duplication.
+changelog:
+  disable: true
