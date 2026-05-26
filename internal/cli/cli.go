@@ -65,7 +65,7 @@ func Run(ctx context.Context, args []string, stdout, stderr io.Writer) error {
 		return usageErr(err)
 	}
 	if *versionFlag {
-		_, _ = io.WriteString(stdout, version+"\n")
+		_, _ = io.WriteString(stdout, resolveVersion()+"\n")
 		return nil
 	}
 	rest := global.Args()
@@ -74,7 +74,7 @@ func Run(ctx context.Context, args []string, stdout, stderr io.Writer) error {
 		return nil
 	}
 	if rest[0] == "version" {
-		_, _ = io.WriteString(stdout, version+"\n")
+		_, _ = io.WriteString(stdout, resolveVersion()+"\n")
 		return nil
 	}
 	r := &runtime{
