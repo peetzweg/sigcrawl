@@ -31,14 +31,14 @@ type ImportStats struct {
 }
 
 type Status struct {
-	DBPath         string    `json:"db_path"`
-	Chats          int       `json:"chats"`
-	Messages       int       `json:"messages"`
-	MediaMessages  int       `json:"media_messages"`
-	OldestMessage  time.Time `json:"oldest_message,omitzero"`
-	NewestMessage  time.Time `json:"newest_message,omitzero"`
-	LastImportAt   time.Time `json:"last_import_at,omitzero"`
-	LastSource     string    `json:"last_source,omitempty"`
+	DBPath        string    `json:"db_path"`
+	Chats         int       `json:"chats"`
+	Messages      int       `json:"messages"`
+	MediaMessages int       `json:"media_messages"`
+	OldestMessage time.Time `json:"oldest_message,omitzero"`
+	NewestMessage time.Time `json:"newest_message,omitzero"`
+	LastImportAt  time.Time `json:"last_import_at,omitzero"`
+	LastSource    string    `json:"last_source,omitempty"`
 }
 
 type Chat struct {

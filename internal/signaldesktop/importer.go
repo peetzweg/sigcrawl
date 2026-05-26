@@ -182,11 +182,11 @@ func readMessages(ctx context.Context, db *sql.DB, chats []store.Chat, idxByID m
 	var out []store.Message
 	for rows.Next() {
 		var (
-			id, chatID                                              string
-			typeStr, body, sourceID                                 sql.NullString
-			attachmentsJSON, reactionsJSON, mentionsJSON            sql.NullString
-			sentAt, recvAt                                          sql.NullInt64
-			hasAttach                                               sql.NullInt64
+			id, chatID                                   string
+			typeStr, body, sourceID                      sql.NullString
+			attachmentsJSON, reactionsJSON, mentionsJSON sql.NullString
+			sentAt, recvAt                               sql.NullInt64
+			hasAttach                                    sql.NullInt64
 		)
 		if err := rows.Scan(&id, &chatID, &typeStr, &body, &sentAt, &recvAt, &hasAttach, &sourceID, &attachmentsJSON, &reactionsJSON, &mentionsJSON); err != nil {
 			return nil, err
