@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.1](https://github.com/peetzweg/sigcrawl/compare/v0.2.0...v0.2.1) (2026-05-26)
+
+
+### Bug Fixes
+
+* derive version from runtime/debug for `go install` builds ([b64686b](https://github.com/peetzweg/sigcrawl/commit/b64686b30e73f2284cc2ec4014d1ce983692f299))
+
 ## [0.2.0](https://github.com/peetzweg/sigcrawl/compare/v0.1.0...v0.2.0) (2026-05-26)
 
 
