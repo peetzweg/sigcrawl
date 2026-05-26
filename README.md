@@ -17,40 +17,31 @@ It is local-first:
 
 ## Install
 
-### Prerequisites
-
-Install [`sigtop`](https://github.com/tbvdm/sigtop) — sigcrawl uses it as the decryption backend for Signal Desktop's SQLCipher database:
+### Homebrew (recommended)
 
 ```bash
-brew install tbvdm/tap/sigtop
+brew install --HEAD tbvdm/tap/sigtop   # decryption backend
+brew install peetzweg/tap/sigcrawl
 ```
 
-### sigcrawl
+The first command installs [`sigtop`](https://github.com/tbvdm/sigtop), which sigcrawl shells out to for SQLCipher decryption. The second command installs sigcrawl itself from [`peetzweg/homebrew-tap`](https://github.com/peetzweg/homebrew-tap).
+
+### Go install
 
 ```bash
+brew install --HEAD tbvdm/tap/sigtop       # still required
 go install github.com/peetzweg/sigcrawl/cmd/sigcrawl@latest
 ```
 
-Or build locally:
+### Build from source
 
 ```bash
+brew install --HEAD tbvdm/tap/sigtop
 git clone https://github.com/peetzweg/sigcrawl
 cd sigcrawl
 make build
 ./bin/sigcrawl --help
 ```
-
-### Docker
-
-```bash
-docker build -t sigcrawl .
-docker run --rm \
-  -v "$HOME/.sigcrawl:/data" \
-  -v "$HOME/Library/Application Support/Signal:/signal:ro" \
-  sigcrawl --source /signal doctor
-```
-
-The image bundles a `sigtop` binary so it is self-contained.
 
 ## Sync
 
