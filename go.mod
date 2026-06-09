@@ -4,7 +4,7 @@ go 1.26.2
 
 require (
 	github.com/openclaw/crawlkit v0.7.0
-	modernc.org/sqlite v1.50.1
+	modernc.org/sqlite v1.52.0
 )
 
 require (
