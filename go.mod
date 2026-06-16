@@ -3,7 +3,7 @@ module github.com/peetzweg/sigcrawl
 go 1.26.2
 
 require (
-	github.com/openclaw/crawlkit v0.11.0
+	github.com/openclaw/crawlkit v0.12.0
 	modernc.org/sqlite v1.52.0
 )
 
