@@ -1,9 +1,9 @@
 module github.com/peetzweg/sigcrawl
 
-go 1.26.4
+go 1.26.5
 
 require (
-	github.com/openclaw/crawlkit v0.13.3
+	github.com/openclaw/crawlkit v0.14.2
 	modernc.org/sqlite v1.53.0
 )
 
